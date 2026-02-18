@@ -413,6 +413,12 @@ article {
         -webkit-text-stroke: 1px black;
     }
 
+    .container{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+}
 }
 
 /* carousel 2*/
