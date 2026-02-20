@@ -101,23 +101,51 @@ const thumbnailsItems = thumbnail.querySelectorAll('.item');
 thumbnail.appendChild(thumbnailsItems[0]);
 
 function showSlider(direction) {
-    const sliderItems = sliderList.querySelectorAll('.item');
-    const thumbItems = thumbnail.querySelectorAll('.item');
+    // prevent double triggers while animating
+    if (carousel2.classList.contains('animating')) return;
+    carousel2.classList.add('animating');
+
+    // Reorder DOM first so CSS :nth-child selectors target the intended items
+    if (direction === 'next') {
+        const sliderItems = sliderList.querySelectorAll('.item');
+        const thumbItems = thumbnail.querySelectorAll('.item');
+        if (sliderItems.length) sliderList.appendChild(sliderItems[0]);
+        if (thumbItems.length) thumbnail.appendChild(thumbItems[0]);
+    } else {
+        const sliderItems = sliderList.querySelectorAll('.item');
+        const thumbItems = thumbnail.querySelectorAll('.item');
+        if (sliderItems.length) sliderList.prepend(sliderItems[sliderItems.length - 1]);
+        if (thumbItems.length) thumbnail.prepend(thumbItems[thumbItems.length - 1]);
+    }
+
+    // force a style/layout flush so the browser acknowledges the new order
+    // then add the class that triggers the animation (nth-child rules will match)
+    void carousel2.offsetWidth;
 
     if (direction === 'next') {
-        sliderList.appendChild(sliderItems[0]);
-        thumbnail.appendChild(thumbItems[0]);
         carousel2.classList.add('next');
     } else {
-        sliderList.prepend(sliderItems[sliderItems.length - 1]);
-        thumbnail.prepend(thumbItems[thumbItems.length - 1]);
         carousel2.classList.add('prev');
     }
 
-    // limpiar clases de animación
-    setTimeout(() => {
-        carousel2.classList.remove('next', 'prev');
-    }, 300); // mismo tiempo que tu animación CSS
+    // when animation ends, clear flags and classes
+    const finish = () => {
+        carousel2.classList.remove('next', 'prev', 'animating');
+    };
+
+    const onAnimEnd = () => {
+        finish();
+        carousel2.removeEventListener('animationend', onAnimEnd);
+        clearTimeout(fallback);
+    };
+
+    carousel2.addEventListener('animationend', onAnimEnd);
+
+    // fallback in case animationend doesn't fire
+    const fallback = setTimeout(() => {
+        carousel2.removeEventListener('animationend', onAnimEnd);
+        finish();
+    }, 600);
 }
 
 // Eventos botones

@@ -512,34 +512,37 @@ article {
 .carousel2 .list .item:nth-child(1) .content .topic,
 .carousel2 .list .item:nth-child(1) .content .des,
 .carousel2 .list .item:nth-child(1) .content .buttons {
-    transform: translateY(50px);
-    filter: blur(20px);
+    transform: translateY(12px);
     opacity: 0;
-    animation: showContent .5s 1s linear 1 forwards;
+    will-change: transform, opacity;
+    animation: showContent 0.35s cubic-bezier(.2,.8,.2,1) 0.12s 1 forwards;
 }
 
 @keyframes showContent {
+    from {
+        transform: translateY(12px);
+        opacity: 0;
+    }
     to {
         transform: translateY(0px);
-        filter: blur(0px);
         opacity: 1;
     }
 }
 
 .carousel2 .list .item:nth-child(1) .content .title {
-    animation-delay: 1.2s !important;
+    animation-delay: 0.22s !important;
 }
 
 .carousel2 .list .item:nth-child(1) .content .topic {
-    animation-delay: 1.4s !important;
+    animation-delay: 0.32s !important;
 }
 
 .carousel2 .list .item:nth-child(1) .content .des {
-    animation-delay: 1.6s !important;
+    animation-delay: 0.42s !important;
 }
 
 .carousel2 .list .item:nth-child(1) .content .buttons {
-    animation-delay: 1.8s !important;
+    animation-delay: 0.52s !important;
 }
 
 /* create animation when next click */
@@ -628,13 +631,17 @@ article {
 .carousel2.prev .list .item:nth-child(2) .content .topic,
 .carousel2.prev .list .item:nth-child(2) .content .des,
 .carousel2.prev .list .item:nth-child(2) .content .buttons {
-    animation: contentOut 1.5s linear 1 forwards !important;
+    will-change: transform, opacity;
+    animation: contentOut 0.35s cubic-bezier(.2,.8,.2,1) 0s 1 forwards !important;
 }
 
 @keyframes contentOut {
+    from {
+        transform: translateY(0px);
+        opacity: 1;
+    }
     to {
-        transform: translateY(-150px);
-        filter: blur(20px);
+        transform: translateY(-18px);
         opacity: 0;
     }
 }
