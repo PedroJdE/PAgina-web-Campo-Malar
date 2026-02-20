@@ -8,31 +8,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Reduced-motion / low-power overrides: applied dynamically via JS by adding
-   class `low-power` to the <body>. This reduces costly effects on weak devices. */
-.low-power .carousel img,
-.low-power .carousel2 .list .item img,
-.low-power .thumbnail .item img {
-    box-shadow: none !important;
-    filter: none !important;
-}
-
-.low-power .carousel2 .list .item .content * {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
-    opacity: 1 !important;
-}
-
-.low-power .carousel2 .list .item .content {
-    will-change: auto !important;
-}
-
-.low-power * {
-    /* shorten any remaining transitions globally */
-    transition-duration: 120ms !important;
-    transition-timing-function: linear !important;
-}
+/* low-power overrides removed per user request */
 
 a {
     text-decoration: none;
@@ -396,12 +372,6 @@ article {
     height: 100%;
     position: absolute;
     inset: 0 0 0 0;
-}
-
-/* Hide all slides by default to prevent flash when images load lazily.
-   Show only the first slide statically on initial paint. */
-.carousel2 .list .item {
-    /* original visibility handled by JS/CSS animations */
 }
 
 .carousel2 .list .item img {

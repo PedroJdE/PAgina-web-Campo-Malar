@@ -100,31 +100,7 @@ const thumbnail = carousel2.querySelector('.thumbnail');
 const thumbnailsItems = thumbnail.querySelectorAll('.item');
 thumbnail.appendChild(thumbnailsItems[0]);
 
-// Detect low-power / reduced data environments and add class to <body>
-function detectLowPowerMode() {
-    try {
-        const nav = navigator;
-        const connection = nav.connection || nav.mozConnection || nav.webkitConnection || {};
-        const deviceMemory = nav.deviceMemory || 0;
-        const hwThreads = nav.hardwareConcurrency || 0;
-        const saveData = connection.saveData === true;
-        const effectiveType = connection.effectiveType || '';
-
-        // Heuristics: low memory, few CPU threads, save-data enabled, slow connection
-        const lowMemory = deviceMemory > 0 ? deviceMemory < 2 : false;
-        const fewCores = hwThreads > 0 ? hwThreads <= 2 : false;
-        const slowNetwork = typeof effectiveType === 'string' && (effectiveType.includes('2g') || effectiveType.includes('slow-2g'));
-
-        if (saveData || lowMemory || fewCores || slowNetwork) {
-            document.body.classList.add('low-power');
-        }
-    } catch (e) {
-        // silent fallback
-    }
-}
-
-// Run detection early (script is deferred, DOM is ready)
-detectLowPowerMode();
+// low-power detection removed per user request
 
 function showSlider(direction) {
     // prevent double triggers while animating
