@@ -330,6 +330,8 @@ article {
     transform: translate(-50%, 100%) scale(0.8);
     opacity: 0;
     filter: blur(5px);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
 }
 
 .carousel img.horizontal {
@@ -736,6 +738,12 @@ article {
         transition: transform 1s ease-in-out, opacity 1s ease-in-out, filter 1s ease-in-out;
         transform: translate(-50%, 150%) scale(0.8);
         filter: blur(5px);
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+    }
+
+    .carousel img.horizontal { 
+        top: 50%;
     }
 
     .LogoBig {
@@ -773,5 +781,9 @@ article {
 
     .carousel-container {
         background: black !important;
+    }
+
+    .divisor{
+        height: 0px;
     }
 }
