@@ -738,15 +738,6 @@ article {
         filter: blur(5px);
     }
 
-    .carousel img.horizontal {
-        opacity: 1;
-    }
-
-    .carousel img.vertical {
-        opacity: 1;
-
-    }
-
     .LogoBig {
         position: relative;
         top: -20px;
@@ -778,5 +769,9 @@ article {
 
     .container{
     flex-direction: column;
+    }
+
+    .carousel-container {
+        background: black !important;
     }
 }
