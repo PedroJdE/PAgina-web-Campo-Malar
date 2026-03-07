@@ -31,6 +31,8 @@ const carouselImages = document.querySelectorAll('.carousel img');
 const carouselContainer = document.querySelector('.carousel-container');
 const bgCurrent = document.querySelector('.bg-current');
 const bgNext = document.querySelector('.bg-next');
+const isMobile = window.innerWidth <= 678;
+const transitionDuration = isMobile ? 500 : 1000;
 
 let currentIndex = 0;
 let intervalId = null;
@@ -88,11 +90,11 @@ function updateCarousel(newIndex) {
         bgCurrent.style.backgroundImage = bgNext.style.backgroundImage;
         bgCurrent.style.opacity = '1';
         bgNext.style.opacity = '0';
-    }, 1000);
+    }, transitionDuration);
 
     setTimeout(() => {
         carouselImages.forEach(img => img.classList.remove('prev'));
-    }, 1000);
+    }, transitionDuration);
 }
 
 // Autoplay
@@ -108,7 +110,10 @@ function startAutoPlay() {
 if (carouselImages.length > 0) {
     updateCarousel(0);
     bgCurrent.style.backgroundImage = `url(${carouselImages[0].src})`;
-    startAutoPlay();
+    // Pausar autoplay en móviles para mejor rendimiento
+    if (window.innerWidth > 678) {
+        startAutoPlay();
+    }
 }
 
 /* =========================
@@ -171,7 +176,7 @@ function showSlider(direction) {
             bgCurrent2.style.backgroundImage = bgNext2.style.backgroundImage;
             bgCurrent2.style.opacity = '1';
             bgNext2.style.opacity = '0';
-        }, 600);
+        }, isMobile ? 300 : 600);
     };
 
     const onAnimEnd = () => {
@@ -186,7 +191,7 @@ function showSlider(direction) {
     const fallback = setTimeout(() => {
         carousel2.removeEventListener('animationend', onAnimEnd);
         finish();
-    }, 600);
+    }, isMobile ? 300 : 600);
 }
 
 // Eventos botones

@@ -759,8 +759,8 @@ article {
         object-fit: contain;
         border-radius: 15px;
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
-        transition: transform 1s ease-in-out, opacity 1s ease-in-out, filter 1s ease-in-out;
-        transform: translate(-50%, 150%) scale(0.8);
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, filter 0.5s ease-in-out;
+        transform: translate3d(-50%, 150%, 0) scale(0.8);
         filter: blur(5px);
         will-change: transform, opacity;
         backface-visibility: hidden;
@@ -782,9 +782,18 @@ article {
     .carousel img.active {
         z-index: 2;
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
+        transform: translate3d(-50%, -50%, 0) scale(1);
         filter: blur(0px);
 
+    }
+
+    .background {
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .carousel2.next,
+    .carousel2.prev {
+        animation-duration: 0.3s;
     }
 
     .slogan1 {
