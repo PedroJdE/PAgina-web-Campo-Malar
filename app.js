@@ -29,6 +29,8 @@ document.querySelectorAll('.overlay-content a').forEach(link => {
 
 const carouselImages = document.querySelectorAll('.carousel img');
 const carouselContainer = document.querySelector('.carousel-container');
+const bgCurrent = document.querySelector('.bg-current');
+const bgNext = document.querySelector('.bg-next');
 
 let currentIndex = 0;
 let intervalId = null;
@@ -53,6 +55,19 @@ carouselImages.forEach(img => {
     }
 });
 
+// Preload images
+carouselImages.forEach(img => {
+    const preloadImg = new Image();
+    preloadImg.src = img.src;
+});
+
+// Preload carousel2 images
+const carousel2Images = document.querySelectorAll('.carousel2 img');
+carousel2Images.forEach(img => {
+    const preloadImg = new Image();
+    preloadImg.src = img.src;
+});
+
 
 // Actualizar carrusel
 function updateCarousel(newIndex) {
@@ -63,11 +78,21 @@ function updateCarousel(newIndex) {
 
     carouselImages[currentIndex].classList.add('active');
 
+    // Update background with smooth transition
+    bgNext.style.backgroundImage = `url(${carouselImages[currentIndex].src})`;
+    bgNext.style.opacity = '1';
+    bgCurrent.style.opacity = '0';
+
+    // After transition, update current background
+    setTimeout(() => {
+        bgCurrent.style.backgroundImage = bgNext.style.backgroundImage;
+        bgCurrent.style.opacity = '1';
+        bgNext.style.opacity = '0';
+    }, 1000);
+
     setTimeout(() => {
         carouselImages.forEach(img => img.classList.remove('prev'));
     }, 1000);
-
-    carouselContainer.style.backgroundImage = `url(${carouselImages[currentIndex].src})`;
 }
 
 // Autoplay
@@ -82,6 +107,7 @@ function startAutoPlay() {
 // Inicializar
 if (carouselImages.length > 0) {
     updateCarousel(0);
+    bgCurrent.style.backgroundImage = `url(${carouselImages[0].src})`;
     startAutoPlay();
 }
 
@@ -95,6 +121,8 @@ const prevBtn = document.getElementById('prev');
 const carousel2 = document.querySelector('.carousel2');
 const sliderList = carousel2.querySelector('.list');
 const thumbnail = carousel2.querySelector('.thumbnail');
+const bgCurrent2 = carousel2.querySelector('.bg-current');
+const bgNext2 = carousel2.querySelector('.bg-next');
 
 // Reordenar thumbnails
 const thumbnailsItems = thumbnail.querySelectorAll('.item');
@@ -133,6 +161,17 @@ function showSlider(direction) {
     // when animation ends, clear flags and classes
     const finish = () => {
         carousel2.classList.remove('next', 'prev', 'animating');
+        // Update background
+        const currentItem = carousel2.querySelector('.list .item:nth-child(1)');
+        const currentImg = currentItem.querySelector('img');
+        bgNext2.style.backgroundImage = `url(${currentImg.src})`;
+        bgNext2.style.opacity = '1';
+        bgCurrent2.style.opacity = '0';
+        setTimeout(() => {
+            bgCurrent2.style.backgroundImage = bgNext2.style.backgroundImage;
+            bgCurrent2.style.opacity = '1';
+            bgNext2.style.opacity = '0';
+        }, 600);
     };
 
     const onAnimEnd = () => {
@@ -155,3 +194,8 @@ if (nextBtn && prevBtn) {
     nextBtn.addEventListener('click', () => showSlider('next'));
     prevBtn.addEventListener('click', () => showSlider('prev'));
 }
+
+// Initialize background for carousel2
+const initialItem = carousel2.querySelector('.list .item:nth-child(1)');
+const initialImg = initialItem.querySelector('img');
+bgCurrent2.style.backgroundImage = `url(${initialImg.src})`;
