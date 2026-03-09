@@ -680,7 +680,7 @@ article {
 .container{
     display: flex;
     gap: 20px;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
 .Contacto {
@@ -694,8 +694,7 @@ article {
 .Ubicación {
     justify-content: center;
     color: beige;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin: 40px;
     font-family: "Nunito", serif;
 }
 
@@ -740,6 +739,19 @@ article {
     font-size: 16px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+}
+
+.encuesta {
+    margin-left: 20px;
+    font-family: "Nunito", serif;
+    font-weight: 700;
+    color: black;
+    padding: 9px 25px;
+    background: beige;
+    border: 1px solid black;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3 ease 0;
 }
 
 .divisor{
