@@ -81,12 +81,13 @@ function updateCarousel(newIndex) {
     // Update background with smooth transition
     bgNext.style.backgroundImage = `url(${carouselImages[currentIndex].src})`;
     bgNext.style.opacity = '1';
-    bgCurrent.style.opacity = '0';
+    // keep bgCurrent visible so we never flash to body background
+    // bgCurrent.style.opacity = '0';
 
-    // After transition, update current background
+    // After transition, update current background and hide the overlay
     setTimeout(() => {
         bgCurrent.style.backgroundImage = bgNext.style.backgroundImage;
-        bgCurrent.style.opacity = '1';
+        // restore bgNext to transparent so it can be used for the next fade
         bgNext.style.opacity = '0';
     }, 1000);
 
@@ -106,8 +107,10 @@ function startAutoPlay() {
 
 // Inicializar
 if (carouselImages.length > 0) {
-    updateCarousel(0);
+    // set first slide without triggering the transition effect
+    carouselImages[0].classList.add('active');
     bgCurrent.style.backgroundImage = `url(${carouselImages[0].src})`;
+    bgCurrent.style.opacity = '1';
     startAutoPlay();
 }
 

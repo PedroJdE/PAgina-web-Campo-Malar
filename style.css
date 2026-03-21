@@ -312,38 +312,40 @@ article {
     opacity: 1;
 }
 
+.carousel-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
 .carousel {
     display: flex;
-    flex-direction: column;
     position: relative;
     height: 100%;
     overflow: hidden;
     width: 100%;
+    margin: auto;
+    align-items: center;
 }
 
 .slogan1 {
-    position: absolute;
-    top: 20%;
-    left: 10%;
     z-index: 1;
-    font-size: 5em;
+    font-size: 3em;
     font-weight: bold;
     line-height: 1.3em;
     opacity: 0.7;
-    -webkit-text-stroke: 1px black;
 }
-
 
 .carousel img {
     position: absolute;
-    left: 85%;
-    top: 50%;
     width: auto;
-    height: 650px;
+    max-height: 650px;
     object-fit: contain;
     border-radius: 15px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
     transition: transform 1s ease-in-out, opacity 1s ease-in-out, filter 1s ease-in-out;
+    left: 50%;
+    right: 50%;
     transform: translate(-50%, 100%) scale(0.8);
     opacity: 0;
     filter: blur(5px);
@@ -354,7 +356,7 @@ article {
 .carousel img.horizontal {
     width: 500px;
     height: auto;
-    top: 25%;
+    top: 75%;
     opacity: 0;
 }
 
@@ -713,9 +715,12 @@ article {
     height: 450px;
 }
 
-.btn-wsp {
-    display: inline-block;
-    background-color: #25D366; /* color WhatsApp */
+.btn-wsp,
+.instagram {
+    display: inline-flex;        
+    align-items: center;         
+    justify-content: center;    
+    gap: 8px;                   
     color: white;
     padding: 12px 20px;
     border-radius: 8px;
@@ -723,6 +728,10 @@ article {
     font-size: 16px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+}
+
+.btn-wsp {
+    background-color: #25D366;
 }
 
 .btn-wsp:hover {
@@ -730,19 +739,21 @@ article {
 }
 
 .instagram {
-    display: inline-block;
-    background-color: #d3259f; /* color WhatsApp */
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    background-color: #d3259f;
+}
+
+.instagram:hover {
+    background-color: #b01e7a;
+}
+
+.btn-wsp svg,
+.instagram svg {
+    width: 18px;
+    height: 18px;
 }
 
 .encuesta {
-    margin-left: 20px;
+    margin: 20px;
     font-family: "Nunito", serif;
     font-weight: 700;
     color: black;
@@ -782,6 +793,10 @@ article {
         top: 50%;
     }
 
+    .carousel img.vertical.active{
+        opacity: 0;
+    }
+
     .LogoBig {
         position: relative;
         top: -20px;
@@ -800,22 +815,145 @@ article {
     }
 
     .slogan1 {
-        position: absolute;
-        top: 190%;
-        left: 10%;
-        z-index: 1;
-        font-size: 2.5em;
-        font-weight: bold;
-        line-height: 1.3em;
-        opacity: 0.7;
-        -webkit-text-stroke: 1px black;
+       
     }
 
     .container{
     flex-direction: column;
     }
+}
 
-    .divisor{
-        height: 0px;
+@media screen and (max-width: 1095px) {
+    .carousel-container{
+        flex-direction: column;
+    }
+
+    .slogan1{
+        font-size: 2em;
+    }
+    
+    .carousel img {
+        max-height: 281.25px;
+        top: 30%;
+    }
+    
+    .carousel img.horizontal {
+        top: 20%;
+        max-width: 300px;
     }
 }
+
+/* --- Sección de Reservas con efecto Liquid Glass --- */
+
+.booking-section {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 50px;
+    letter-spacing: -1px;
+}
+
+.booking-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.booking-card {
+    /* Estilo Glassmorphism / iOS Style */
+    background: rgba(255, 255, 255, 0.06); 
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booking-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.booking-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #34c759; /* Verde iOS */
+    margin-bottom: 15px;
+}
+
+.price span {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+}
+
+.description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+}
+
+/* --- Botones --- */
+
+.btn-next {
+    background-color: #007aff; /* Azul iOS */
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    transition: background 0.3s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-next:hover {
+    background-color: #0a84ff;
+    filter: brightness(1.1);
+}
+
+.btn-next:active {
+    transform: scale(0.96);
+}
+
+/* --- Variantes de color para Guías --- */
+
+.guide-alt .price {
+    color: #ff9f0a; /* Naranja iOS */
+}
+
+.guide-alt .btn-next {
+    background-color: #ff9f0a;
+}
+
+.guide-pro .price {
+    color: #bf5af2; /* Púrpura iOS */
+}
+
+.guide-pro .btn-next {
+    background-color: #bf5af2;
+}
+
