@@ -278,7 +278,9 @@
     }
 
     // Detectar si viene del pago
-    const API_BASE_URL = 'http://localhost:3000';
+    const API_BASE_URL = window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://campomalar-backend.vercel.app";
     const pagoExitoso = params.get('pago');
 
     if (pagoExitoso === 'exitoso') {
