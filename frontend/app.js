@@ -20,6 +20,22 @@ function irAReserva(pack) {
     }
 }
 
+const params = new URLSearchParams(window.location.search);
+
+const estado = params.get("estado");
+
+if (estado === "exito") {
+    alert("Pago aprobado");
+}
+
+if (estado === "error") {
+    alert("El pago fue rechazado");
+}
+
+if (estado === "pendiente") {
+    alert("El pago está pendiente");
+}
+
 /* =========================
    MENU MOBILE (OVERLAY)
 ========================= */

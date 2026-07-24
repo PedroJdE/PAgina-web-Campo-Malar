@@ -171,9 +171,9 @@ app.post('/crear-preferencia', async (req, res) => {
                 email: email
             },
             back_urls: {
-                success: `${FRONTEND_URL}/exito.html?pack=${pack}&pago=exitoso&pernocte=${pernocteBool}&personas=${numPersonas}&noches=${numNoches}&fecha=${fecha}`,
-                failure: `${FRONTEND_URL}/error.html`,
-                pending: `${FRONTEND_URL}/pending.html`
+                success: `${FRONTEND_URL}/reserva.html?estado=exito`,
+                failure: `${FRONTEND_URL}/reserva.html?estado=error`,
+                pending: `${FRONTEND_URL}/reserva.html?estado=pendiente`
             }
         };
 
