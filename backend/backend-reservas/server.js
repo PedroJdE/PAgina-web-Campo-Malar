@@ -24,13 +24,18 @@ import DisabledDate from './models/DisabledDate.js';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
 app.use(express.json());
 
 // Carpeta pública
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
+    // Archivos públicos del backend
+    app.use(express.static(path.join(__dirname, 'public')));
+    // Frontend principal
     app.use(express.static(path.join(__dirname, '..', '..', 'frontend')));
-    app.use(express.static(path.join(__dirname, '..', '..')));
 
 const PORT = process.env.PORT || 3000;
 
@@ -155,7 +160,7 @@ app.post('/crear-preferencia', async (req, res) => {
             precioTotal
         });
 
-        const FRONTEND_URL = process.env.FRONTEND_URL;
+        const BACKEND_URL = process.env.URL_BACKEND;
         const preferenceBody = {
             items: [
                 {
@@ -171,10 +176,10 @@ app.post('/crear-preferencia', async (req, res) => {
                 email: email
             },
             back_urls: {
-                success: `${FRONTEND_URL}/?estado=exito#reserva`,
-                failure: `${FRONTEND_URL}/?estado=error#reserva`,
-                pending: `${FRONTEND_URL}/?estado=pendiente#reserva`
-            }
+                success: `${BACKEND_URL}/exito.html?pack=${pack}&pago=exitoso&pernocte=${pernocteBool}&personas=${numPersonas}&noches=${numNoches}&fecha=${fecha}`,
+                failure: `${BACKEND_URL}/error.html`,
+                pending: `${BACKEND_URL}/pending.html`
+            },
         };
 
         console.log("Preference request body:", JSON.stringify(preferenceBody, null, 2));
@@ -544,29 +549,53 @@ app.get('/api/descargar-formulario/:id', async (req, res) => {
     }
 });
 
-// Iniciar servidor
-const startServer = async () => {
+let serverStarted = false;
+
+const initServer = async () => {
+    if (serverStarted) return;
+
     try {
-        // Conectar a MongoDB
         await connectDB();
-        
-        // Crear carpeta de uploads si no existe
+
         if (!fs.existsSync('uploads')) {
             fs.mkdirSync('uploads', { recursive: true });
             console.log("📁 Carpeta uploads creada");
         }
-        
-        app.listen(PORT, () => {
-            console.log(`Servidor corriendo en http://localhost:${PORT}`);
-            console.log("📊 MongoDB conectado y listo para guardar datos");
-        });
+
+        serverStarted = true;
+        console.log("📊 MongoDB conectado y listo");
+
     } catch (error) {
-        console.error("❌ Error al iniciar servidor:", error);
-        process.exit(1);
+        console.error("❌ Error al conectar servicios:", error);
+        throw error;
     }
 };
 
-startServer();
+
+// Desarrollo local
+if (process.env.NODE_ENV !== "production") {
+    initServer().then(() => {
+        app.listen(PORT, () => {
+            console.log(`Servidor corriendo en http://localhost:${PORT}`);
+        });
+    });
+}
+
+
+// Vercel
+app.use(async (req, res, next) => {
+    try {
+        await initServer();
+        next();
+    } catch (error) {
+        res.status(500).json({
+            error: "Error iniciando servidor"
+        });
+    }
+});
+
+
+export default app;
 
 const fechasBloqueadas = [
     "2026-04-24",
