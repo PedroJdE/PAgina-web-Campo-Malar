@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pago Exitoso</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ Pago Exitoso</h1>
+        <p>Tu pago ha sido procesado correctamente.</p>
+        <p>Recibirás un email de confirmación pronto.</p>
+        <button onclick="mostrarSubida()">Continuar con la subida del formulario</button>
+    </div>
+
+    <script>
+        function mostrarSubida() {
+            // Redirigir de vuelta a reserva.html con el parámetro para mostrar el paso 3
+            const urlParams = new URLSearchParams(window.location.search);
+            const pack = urlParams.get('pack') || 'pack1';
+            const pernocte = urlParams.get('pernocte') || 'false';
+            const personas = urlParams.get('personas') || '1';
+            const noches = urlParams.get('noches') || '1';
+            window.location.href = `/reserva.html?pack=${pack}&pago=exitoso&pernocte=${pernocte}&personas=${personas}&noches=${noches}`;
+        }
+    </script>
+</body>
+</html>

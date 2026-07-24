@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Reservar - Campo Malar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./reserva.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<body>
+    <!-- PORTADA -->
+    <section class="portada-section">
+        <img src="/image/Portada.jpg" alt="Portada" class="portada-bg">
+        <div class="portada-logo">
+            <img src="/image/Asset 2.png" alt="Logo Campo Malar">
+        </div>
+        <h1 class="portada-title">Completa tu Reserva</h1>
+    </section>
+
+    <div class="container">
+
+        <!-- RESUMEN DEL PACK -->
+        <div class="pack-summary" id="packSummary" style="display: none;">
+            <h3>Resumen de tu selección</h3>
+            <div class="summary-details">
+                <p><strong>Pack:</strong> <span id="summaryPackName"></span></p>
+                <p><strong>Personas:</strong> <span id="summaryPersonas"></span></p>
+                <p><strong>Fecha:</strong> <span id="summaryFecha"></span></p>
+                <p><strong>Pernocte:</strong> <span id="summaryPernocte"></span></p>
+                <p><strong>Total estimado:</strong> <span id="summaryTotal"></span></p>
+            </div>
+        </div>
+
+        <!-- PASO 1 -->
+        <div class="step" id="step1">
+            <h2><span class="step-number">1</span> Datos Personales</h2>
+            <input type="text" id="nombre" placeholder="Nombre completo">
+            <input type="email" id="email" placeholder="Email">
+            <button onclick="continuarPaso1()">Continuar</button>
+        </div>
+
+        <!-- PASO 2 (nuevo) -->
+        <div class="step hidden" id="stepFecha">
+            <h2><span class="step-number">2</span> Selecciona una fecha</h2>
+            <input type="text" id="fecha" placeholder="Selecciona una fecha">
+            <p id="infoFecha" style="font-size: 0.9rem; opacity: 0.7; margin-top: 5px;">
+                    Selecciona el día de tu visita
+            </p>
+            <button onclick="continuarFecha()">Continuar</button>
+        </div>
+
+        <!-- PASO 3 -->
+        <div class="step hidden" id="step2">
+            <h2><span class="step-number">3</span> Términos y Pago</h2>
+
+            <label>
+                <input type="checkbox" id="terminos">
+                Acepto los términos y condiciones
+            </label>
+
+            <a href="/formulario.pdf" download>📄 Descargar formulario</a>
+
+            <button onclick="irAlPago()">Ir al pago</button>
+            <button id="continuarPagoBtn" class="hidden" onclick="continuarDespuesPago()">Ya pagué, continuar reserva</button>
+            <p id="instruccionesPago" class="hidden">💡 Si Mercado Pago no muestra el botón de volver al sitio, completa el pago en la nueva pestaña y regresa aquí para continuar.</p>
+        </div>
+
+        <!-- PASO 4 -->
+        <div class="step hidden" id="step3">
+            <h2><span class="step-number">4</span> Subir Formulario Firmado</h2>
+            <input type="file" id="archivo">
+            <button onclick="subirFormulario()">Subir formulario</button>
+        </div>
+
+        <div id="mensaje"></div>
+    </div>
+
+    <script>
+    const params = new URLSearchParams(window.location.search);
+
+    const pack = params.get('pack');
+    const pernocte = params.get('pernocte') === 'true';
+    const personas = Number(params.get('personas')) || 1;
+    const noches = pernocte ? Number(params.get('noches')) || 1 : 0;
+
+    let usuario = {};
+
+    // Nombres de los packs
+    const packNames = {
+        pack1: 'Entrada General',
+        pack2: 'Entrada + Trekking',
+        pack4: 'Guías Externos',
+        pack5: 'Socio Prestador'
+    };
+
+    // Precios base
+    const preciosBase = {
+        pack1: 10000,
+        pack2: 15000,
+        pack4: 8000,
+        pack5: 10000
+    };
+
+    function mostrarResumenPack() {
+        if (pack && packNames[pack]) {
+            const summaryDiv = document.getElementById('packSummary');
+
+            document.getElementById('summaryPackName').textContent = packNames[pack];
+            document.getElementById('summaryPersonas').textContent = personas;
+            document.getElementById('summaryPernocte').textContent =
+                pernocte ? `Sí (${noches} noches - $5.000/noche)` : 'No';
+
+            let total = preciosBase[pack] * personas;
+
+            if (pernocte) {
+                total += 5000 * personas * noches;
+            }
+
+            document.getElementById('summaryTotal').textContent = `$${total.toLocaleString()}`;
+            summaryDiv.style.display = 'block';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        mostrarResumenPack();
+    });
+
+    function continuarPaso1() {
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+
+        if (!nombre || !email) {
+            alert("Completa los datos");
+            return;
+        }
+
+        usuario.nombre = nombre;
+        usuario.email = email;
+
+        document.getElementById('step1').classList.add('hidden');
+        document.getElementById('stepFecha').classList.remove('hidden');
+    }
+
+    function continuarFecha() {
+    const fecha = document.getElementById('fecha').value;
+
+    if (!fecha) {
+        alert("Selecciona una fecha");
+        return;
+    }
+
+    usuario.fecha = fecha;
+
+    document.getElementById('summaryFecha').textContent = fecha;
+
+    document.getElementById('stepFecha').classList.add('hidden');
+    document.getElementById('step2').classList.remove('hidden');
+
+    if (fechasBloqueadas.includes(fecha)) {
+    alert("Fecha no disponible");
+    return;
+}
+}
+
+    function irAlPago() {
+        console.log("CLICK EN PAGAR");
+
+        const acepto = document.getElementById('terminos').checked;
+
+        if (!acepto) {
+            alert("Debes aceptar los términos");
+            return;
+        }
+
+        // ✅ DATOS LIMPIOS Y CORRECTOS
+        const cuerpoPago = {
+            ...usuario,
+            fecha: usuario.fecha,
+            pack,
+            pernocte: pernocte === true,
+            personas: Number(personas),
+            noches: Number(noches)
+        };
+
+        console.log("DATOS FINALES:", {
+            ...cuerpoPago,
+            tipos: {
+                personas: typeof cuerpoPago.personas,
+                noches: typeof cuerpoPago.noches,
+                pernocte: typeof cuerpoPago.pernocte
+            }
+        });
+
+        fetch(`${API_BASE_URL}/crear-preferencia`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cuerpoPago)
+        })
+        .then(res => {
+            console.log("STATUS:", res.status);
+            return res.json();
+        })
+        .then(data => {
+            console.log("DATA BACKEND:", data);
+            console.log("Precio total backend:", data.precioTotal);
+
+            if (data.error) {
+                    alert(data.error); // 👈 muestra "Fecha no disponible"
+            return;
+            }
+            if (!data.init_point) {
+                alert("Error inesperado al generar el pago");
+            return;
+            }
+
+            const paymentWindow = window.open(data.init_point, '_blank');
+
+            if (!paymentWindow) {
+                alert("Permite ventanas emergentes o continúa en la misma pestaña.");
+                window.location.href = data.init_point;
+                return;
+            }
+
+            document.getElementById('continuarPagoBtn').classList.remove('hidden');
+            document.getElementById('instruccionesPago').classList.remove('hidden');
+        })
+        .catch(err => {
+            console.error("ERROR FETCH:", err);
+        });
+    }
+
+    function continuarDespuesPago() {
+        document.getElementById('step2').classList.add('hidden');
+        document.getElementById('step3').classList.remove('hidden');
+        document.getElementById('mensaje').innerText =
+            "✅ Si ya completaste el pago, ahora sube el formulario firmado.";
+    }
+
+    function subirFormulario() {
+        const archivo = document.getElementById('archivo').files[0];
+
+        if (!archivo) {
+            alert("Selecciona un archivo");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('archivo', archivo);
+        formData.append('email', usuario.email);
+
+        fetch(`${API_BASE_URL}/subir-formulario`, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            console.log("✅ Respuesta servidor:", data);
+            document.getElementById('mensaje').innerText =
+                "✅ Formulario subido correctamente. Te confirmaremos el acceso por email.";
+            console.log("📋 Reserva ID:", data.reservaId);
+        })
+        .catch(err => {
+            console.error("ERROR:", err);
+            document.getElementById('mensaje').innerText =
+                "❌ Error al subir el formulario: " + err.message;
+        });
+    }
+
+    // Detectar si viene del pago
+    const API_BASE_URL = 'http://localhost:3000';
+    const pagoExitoso = params.get('pago');
+
+    if (pagoExitoso === 'exitoso') {
+        document.getElementById('step1').classList.add('hidden');
+        document.getElementById('step2').classList.add('hidden');
+        document.getElementById('step3').classList.remove('hidden');
+        document.getElementById('mensaje').innerText =
+            "✅ Pago confirmado. Completa la subida del formulario.";
+    }
+
+    const initDatePicker = async () => {
+        let fechasBloqueadas = [];
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/disabled-dates`);
+            if (response.ok) {
+                fechasBloqueadas = await response.json();
+            } else {
+                console.warn('No se pudieron cargar las fechas bloqueadas:', response.status);
+            }
+        } catch (error) {
+            console.warn('Error al obtener fechas bloqueadas:', error);
+        }
+
+        flatpickr('#fecha', {
+            dateFormat: 'Y-m-d',
+            minDate: 'today',
+            disable: fechasBloqueadas
+        });
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        mostrarResumenPack();
+        initDatePicker();
+
+        const hoy = new Date().toISOString().split('T')[0];
+        document.getElementById('fecha').min = hoy;
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</body>
+
+</html>
