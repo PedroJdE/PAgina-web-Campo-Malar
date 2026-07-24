@@ -1,22 +1,26 @@
+const BACKEND_URL = "https://campomalar-backend.vercel.app";
+
 function irAReserva(pack) {
     const card = document.querySelector(`[data-pack="${pack}"]`);
 
     if (card) {
         const pernocte = card.querySelector('.pernocte-toggle').checked;
         const personas = parseInt(card.querySelector('.personas-count').textContent);
-        const noches = pernocte ? parseInt(card.querySelector('.noches-count').textContent) : 0;
+        const noches = pernocte 
+            ? parseInt(card.querySelector('.noches-count').textContent) 
+            : 0;
 
         const params = new URLSearchParams({
-            pack: pack,
-            pernocte: pernocte,
-            personas: personas,
-            noches: noches
+            pack,
+            pernocte,
+            personas,
+            noches
         });
 
-        window.location.href = `/?${params.toString()}#reserva`;
+        window.location.href = `${BACKEND_URL}/reserva.html?${params.toString()}`;
 
     } else {
-        window.location.href = `/?pack=${pack}#reserva`;
+        window.location.href = `${BACKEND_URL}/reserva.html?pack=${pack}`;
     }
 }
 
