@@ -1,22 +1,22 @@
 function irAReserva(pack) {
-    // Obtener datos de la card seleccionada
     const card = document.querySelector(`[data-pack="${pack}"]`);
+
     if (card) {
         const pernocte = card.querySelector('.pernocte-toggle').checked;
         const personas = parseInt(card.querySelector('.personas-count').textContent);
         const noches = pernocte ? parseInt(card.querySelector('.noches-count').textContent) : 0;
-        
-        // Pasar parámetros adicionales a la reserva
+
         const params = new URLSearchParams({
             pack: pack,
             pernocte: pernocte,
             personas: personas,
             noches: noches
         });
-        
-        window.location.href = `/reserva.html?${params.toString()}`;
+
+        window.location.href = `/?${params.toString()}#reserva`;
+
     } else {
-        window.location.href = `/reserva.html?pack=${pack}`;
+        window.location.href = `/?pack=${pack}#reserva`;
     }
 }
 
