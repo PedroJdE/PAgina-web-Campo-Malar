@@ -155,6 +155,7 @@ app.post('/crear-preferencia', async (req, res) => {
             precioTotal
         });
 
+        const FRONTEND_URL = process.env.FRONTEND_URL;
         const preferenceBody = {
             items: [
                 {
@@ -170,9 +171,9 @@ app.post('/crear-preferencia', async (req, res) => {
                 email: email
             },
             back_urls: {
-                success: `http://localhost:3000/exito.html?pack=${pack}&pago=exitoso&pernocte=${pernocteBool}&personas=${numPersonas}&noches=${numNoches}&fecha=${fecha}`,
-                failure: "http://localhost:3000/error.html",
-                pending: "http://localhost:3000/pending.html"
+                success: `${FRONTEND_URL}/exito.html?pack=${pack}&pago=exitoso&pernocte=${pernocteBool}&personas=${numPersonas}&noches=${numNoches}&fecha=${fecha}`,
+                failure: `${FRONTEND_URL}/error.html`,
+                pending: `${FRONTEND_URL}/pending.html`
             }
         };
 
