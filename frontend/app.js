@@ -1,4 +1,5 @@
 const BACKEND_URL = "https://campomalar-backend.vercel.app";
+const FRONTEND_URL = "https://campo-malar.vercel.app";
 
 function irAReserva(pack) {
     const card = document.querySelector(`[data-pack="${pack}"]`);
@@ -17,10 +18,10 @@ function irAReserva(pack) {
             noches
         });
 
-        window.location.href = `${BACKEND_URL}/reserva.html?${params.toString()}`;
+        window.location.href = `${FRONTEND_URL}/reserva.html?${params.toString()}`;
 
     } else {
-        window.location.href = `${BACKEND_URL}/reserva.html?pack=${pack}`;
+        window.location.href = `${FRONTEND_URL}/reserva.html?pack=${pack}`;
     }
 }
 
