@@ -563,11 +563,6 @@ const initServer = async () => {
     try {
         await connectDB();
 
-        if (!fs.existsSync('uploads')) {
-            fs.mkdirSync('uploads', { recursive: true });
-            console.log("📁 Carpeta uploads creada");
-        }
-
         serverStarted = true;
         console.log("📊 MongoDB conectado y listo");
 
