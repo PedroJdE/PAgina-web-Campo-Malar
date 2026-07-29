@@ -29,9 +29,8 @@ export const connectDB = async () => {
         return true;
     } catch (error) {
         console.error('❌ Error al conectar a MongoDB:', error.message);
-        console.error('Por favor, asegúrate de que MongoDB está corriendo');
-        process.exit(1);
-    }
+    throw error;
+    } 
 };
 
 // Cerrar conexión
