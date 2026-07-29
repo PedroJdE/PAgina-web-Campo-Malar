@@ -263,14 +263,9 @@ app.post('/crear-preferencia', async (req, res) => {
 });
 
 // 📤 Subir formulario
-const storage = multer.diskStorage({
-    destination: 'uploads/',
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
-    }
+const upload = multer({
+    storage: multer.memoryStorage()
 });
-
-const upload = multer({ storage });
 
 app.get('/api/disabled-dates', async (req, res) => {
     try {
@@ -352,7 +347,6 @@ app.post('/subir-formulario', upload.single('archivo'), async (req, res) => {
         // Actualizar la reserva con información del PDF
         reserva.formularioPDF = {
             nombreArchivo: req.file.originalname,
-            rutaArchivo: req.file.path,
             fechaSubida: new Date(),
             tamaño: req.file.size,
             estado: 'recibido'
