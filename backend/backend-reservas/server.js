@@ -172,7 +172,7 @@ app.post('/crear-preferencia', async (req, res) => {
             precioTotal
         });
 
-        const BACKEND_URL = process.env.URL_BACKEND;
+        const FRONTEND_URL = process.env.FRONTEND_URL;
         const preferenceBody = {
             items: [
                 {
@@ -187,10 +187,11 @@ app.post('/crear-preferencia', async (req, res) => {
                 name: nombre,
                 email: email
             },
+            
             back_urls: {
-                success: `${BACKEND_URL}/exito.html?pack=${pack}&pago=exitoso&pernocte=${pernocteBool}&personas=${numPersonas}&noches=${numNoches}&fecha=${fecha}`,
-                failure: `${BACKEND_URL}/error.html`,
-                pending: `${BACKEND_URL}/pending.html`
+                success: `${FRONTEND_URL}/reserva.html?pack=${pack}&pago=exitoso&pernocte=${pernocteBool}&personas=${numPersonas}&noches=${numNoches}&fecha=${fecha}`,
+                failure: `${FRONTEND_URL}/reserva.html?pago=error`,
+                pending: `${FRONTEND_URL}/reserva.html?pago=pendiente`
             },
         };
 
