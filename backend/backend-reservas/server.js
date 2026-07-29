@@ -24,6 +24,18 @@ import DisabledDate from './models/DisabledDate.js';
 
 const app = express();
 
+// Vercel
+app.use(async (req, res, next) => {
+    try {
+        await initServer();
+        next();
+    } catch (error) {
+        res.status(500).json({
+            error: "Error iniciando servidor"
+        });
+    }
+});
+
 app.use(cors({
     origin: process.env.FRONTEND_URL,
     credentials: true
@@ -55,10 +67,10 @@ const sendConfirmationEmail = async (reserva) => {
         subject: `Reserva confirmada - Campo Malar`,
         text: `Hola ${reserva.nombre},\n\nTu reserva ha sido confirmada. En breve recibirás un correo con el ticket de entrada.\n\nGracias por elegir Campo Malar.\n\nSaludos,\nEquipo Campo Malar`,
         html: `<p>Hola ${reserva.nombre},</p>
-               <p>Tu reserva ha sido <strong>confirmada</strong>.</p>
-               <p>En breve recibirás un correo con el <strong>ticket de entrada</strong>.</p>
-               <p>Gracias por elegir <strong>Campo Malar</strong>.</p>
-               <p>Saludos,<br>Equipo Campo Malar</p>`
+                <p>Tu reserva ha sido <strong>confirmada</strong>.</p>
+                <p>En breve recibirás un correo con el <strong>ticket de entrada</strong>.</p>
+                <p>Gracias por elegir <strong>Campo Malar</strong>.</p>
+                <p>Saludos,<br>Equipo Campo Malar</p>`
     };
     await transporter.sendMail(mailOptions);
 };
@@ -70,16 +82,16 @@ const sendNewReservationNotification = async (reserva) => {
         subject: `Nueva reserva recibida - ${reserva.nombre}`,
         text: `Se ha recibido una nueva reserva:\n\nNombre: ${reserva.nombre}\nEmail: ${reserva.email}\nPack: ${reserva.pack}\nFecha: ${reserva.fecha.toISOString().split('T')[0]}\nPersonas: ${reserva.personas}\nPernocte: ${reserva.pernocte ? 'Sí' : 'No'}\nNoches: ${reserva.noches}\n\nRevisa el panel admin para confirmarla.`,
         html: `<p>Se ha recibido una nueva reserva:</p>
-               <ul>
-                 <li><strong>Nombre:</strong> ${reserva.nombre}</li>
-                 <li><strong>Email:</strong> ${reserva.email}</li>
-                 <li><strong>Pack:</strong> ${reserva.pack}</li>
-                 <li><strong>Fecha:</strong> ${reserva.fecha.toISOString().split('T')[0]}</li>
-                 <li><strong>Personas:</strong> ${reserva.personas}</li>
-                 <li><strong>Pernocte:</strong> ${reserva.pernocte ? 'Sí' : 'No'}</li>
-                 <li><strong>Noches:</strong> ${reserva.noches}</li>
-               </ul>
-               <p>Revisa el panel admin para confirmarla.</p>`
+                <ul>
+                    <li><strong>Nombre:</strong> ${reserva.nombre}</li>
+                    <li><strong>Email:</strong> ${reserva.email}</li>
+                    <li><strong>Pack:</strong> ${reserva.pack}</li>
+                    <li><strong>Fecha:</strong> ${reserva.fecha.toISOString().split('T')[0]}</li>
+                    <li><strong>Personas:</strong> ${reserva.personas}</li>
+                    <li><strong>Pernocte:</strong> ${reserva.pernocte ? 'Sí' : 'No'}</li>
+                    <li><strong>Noches:</strong> ${reserva.noches}</li>
+                </ul>
+                <p>Revisa el panel admin para confirmarla.</p>`
     };
     await transporter.sendMail(mailOptions);
 };
@@ -580,20 +592,6 @@ if (process.env.NODE_ENV !== "production") {
         });
     });
 }
-
-
-// Vercel
-app.use(async (req, res, next) => {
-    try {
-        await initServer();
-        next();
-    } catch (error) {
-        res.status(500).json({
-            error: "Error iniciando servidor"
-        });
-    }
-});
-
 
 export default app;
 
