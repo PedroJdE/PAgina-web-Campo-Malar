@@ -19,7 +19,7 @@ const nextMonthBtn = document.getElementById('nextMonthBtn');
 const calendarMessage = document.getElementById('calendarMessage');
 
 const ADMIN_STORAGE_KEY = 'campo-malar-admin-password';
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://campomalar-backend.vercel.app';
 
 const getAuthHeaders = () => {
     const password = localStorage.getItem(ADMIN_STORAGE_KEY);

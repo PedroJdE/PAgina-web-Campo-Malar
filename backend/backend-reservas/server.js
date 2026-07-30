@@ -36,10 +36,34 @@ app.use(async (req, res, next) => {
     }
 });
 
+const allowedOrigins = [
+    "https://campo-malar.vercel.app",
+    "http://127.0.0.1:5500",
+    "http://localhost:5500"
+];
+
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true
+    origin: function (origin, callback) {
+
+        // Permite Postman, pruebas internas, etc.
+        if (!origin) {
+            return callback(null, true);
+        }
+
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error("CORS bloqueado"));
+    },
+    credentials: true,
+    allowedHeaders: [
+        "Content-Type",
+        "x-admin-password"
+    ]
 }));
+
+app.options(/.*/, cors());
 app.use(express.json());
 
 // Carpeta pública
