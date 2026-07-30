@@ -1,5 +1,5 @@
 const BACKEND_URL = "https://campomalar-backend.vercel.app";
-const FRONTEND_URL = "https://campo-malar.vercel.app";
+const FRONTEND_URL = "https://pagina-web-campo-malar.vercel.app";
 
 function irAReserva(pack) {
     const card = document.querySelector(`[data-pack="${pack}"]`);
