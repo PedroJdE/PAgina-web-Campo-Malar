@@ -254,7 +254,7 @@
 
         const formData = new FormData();
         formData.append('archivo', archivo);
-        formData.append('email', usuario.email);
+        formData.append('email', emailReserva);
 
         fetch(`${API_BASE_URL}/subir-formulario`, {
             method: 'POST',
@@ -282,6 +282,9 @@
     ? "http://localhost:3000"
     : "https://campomalar-backend.vercel.app";
     const pagoExitoso = params.get('pago');
+    const emailReserva = params.get('email');
+
+    console.log("Email de reserva:", emailReserva);
 
     if (pagoExitoso === 'exitoso') {
         document.getElementById('step1').classList.add('hidden');
