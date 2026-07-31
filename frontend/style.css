@@ -537,10 +537,12 @@ article {
 
 .thumbnail .item .content .title {
     font-weight: 500;
+    text-shadow: 2px 2px 4px black;
 }
 
 .thumbnail .item .content .description {
     font-weight: 300;
+    text-shadow: 2px 2px 4px black;
 }
 
 /* arrows */
@@ -888,14 +890,35 @@ article {
 
     }
 
-    .slogan1 {
-        font-size: 1.5em;
+    .slogan1 h1{
+        font-size: 1.7em;
         max-width: 95%;
         padding: 10px;
+        align-items: center;
     }
 
     .container{
     flex-direction: column;
+    }
+
+    .carousel2 .list .item .topic{
+        font-size: 3em;
+    }
+
+    .carousel2 .list .item .content .title{
+        font-size: 15.5px;
+    }
+
+    .Ubicación h3{
+        margin: 0px;
+    }
+
+    .article1 p{
+        margin: 0;
+    }
+
+    .article1 h1{
+        font-size: 20px;
     }
 }
 
@@ -1084,20 +1107,19 @@ article {
 .control-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
+    margin-top: 10px;
 }
 
 .pernocte-row {
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.noches-control {
     display: flex;
     align-items: center;
-    margin-top: 8px;
-    margin-left: 62px; /* Align with the label */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+}
+
+.noches-control{
+    align-items: center;
 }
 
 .noches-count {
@@ -1112,6 +1134,11 @@ article {
 .noches-label {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.7);
+    margin-left: 12px;
+}
+
+.personas-label{
+    margin-left: 12px;
 }
 
 .control-row:last-child {
@@ -1256,17 +1283,19 @@ input:checked + .slider:before {
         margin: 15px 0;
     }
     
-    .control-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
+    .control-row{
+        gap: 4px;
     }
-    
+
     .control-label {
-        margin-left: 0;
+        margin-left: 4px;
         margin-top: 4px;
     }
     
+    .noches-label{
+        margin-left: 4px;
+    }
+
     .personas-count {
         margin: 0 8px;
     }
@@ -1317,3 +1346,4 @@ input:checked + .slider:before {
         transform: rotate(45deg);
     }
 }
+
