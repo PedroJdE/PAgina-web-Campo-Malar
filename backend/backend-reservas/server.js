@@ -145,11 +145,9 @@ app.post('/crear-preferencia', async (req, res) => {
         const { nombre, email, pack, pernocte, personas, noches, fecha } = req.body;
 
         const preciosBase = {
-            pack1: 10000,
-            pack2: 15000,
-            pack3: 1500,
-            pack4: 8000,
-            pack5: 10000
+            pack1: 15000,
+            pack2: 30000,
+            pack4: 15000,
         };
 
         console.log("Request body:", JSON.stringify(req.body, null, 2));

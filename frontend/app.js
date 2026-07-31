@@ -71,9 +71,9 @@ document.querySelectorAll('.overlay-content a').forEach(link => {
 
 // Precios base de los packs
 const preciosBase = {
-    pack1: 10000, // Entrada General - ACTUALIZADO
-    pack2: 15000, // Entrada + Trekking - ACTUALIZADO
-    pack4: 8000   // Guías Externos - ACTUALIZADO
+    pack1: 15000, // Entrada General - ACTUALIZADO
+    pack2: 30000, // Entrada + Trekking - ACTUALIZADO
+    pack4: 15000   // Guías Externos - ACTUALIZADO
 };
 
 const precioPernocte = 5000; // Precio por noche de alojamiento - ACTUALIZADO
