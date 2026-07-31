@@ -105,151 +105,182 @@ Para quienes buscan hacer algo diferente conocer lugares nuevos y llevarse exper
     </section>
 
     <section class="booking-section">
-    <h2 class="section-title">Programar Visitas</h2>
+        <h2 class="section-title">Programar Visitas</h2>
+        <div class="booking-grid">
     
-    <div class="booking-grid">
-        <div class="booking-card" data-pack="pack1">
-            <h3>Entrada General</h3>
-            <p class="price">$10.000 <span>/ persona</span></p>
-            <p class="description">Acceso al predio y senderos autoguiados básicos.</p>
-            
-            <!-- Controles adicionales -->
-            <div class="booking-controls">
-                <div class="control-row pernocte-row">
-                    <label class="switch">
-                        <input type="checkbox" class="pernocte-toggle" data-pack="pack1">
-                        <span class="slider"></span>
-                    </label>
-                    <span class="control-label">Pernocte (+$5.000/noche)</span>
-                    <div class="noches-control" data-pack="pack1" style="display: none;">
-                        <button class="counter-btn" onclick="changeNoches('pack1', -1)">-</button>
-                        <span class="noches-count" data-pack="pack1">1</span>
-                        <button class="counter-btn" onclick="changeNoches('pack1', 1)">+</button>
-                        <span class="noches-label">noches</span>
+            <div class="booking-card" data-pack="pack1">
+                <h3>Entrada General</h3>
+                <p class="price">$10.000 <span>/ persona</span></p>
+                <p class="description">Acceso al predio y senderos autoguiados básicos.</p>
+    
+                <button class="card-toggle">
+                    Reservar <span>⌄</span>
+                </button>
+    
+                <div class="card-content">
+    
+                    <div class="booking-controls">
+                        <div class="control-row pernocte-row">
+                            <label class="switch">
+                                <input type="checkbox" class="pernocte-toggle" data-pack="pack1">
+                                <span class="slider"></span>
+                            </label>
+    
+                            <span class="control-label">Pernocte (+$5.000/noche)</span>
+    
+                            <div class="noches-control" data-pack="pack1" style="display:none;">
+                                <button class="counter-btn" onclick="changeNoches('pack1', -1)">-</button>
+                                <span class="noches-count" data-pack="pack1">1</span>
+                                <button class="counter-btn" onclick="changeNoches('pack1', 1)">+</button>
+                                <span class="noches-label">noches</span>
+                            </div>
+                        </div>
+    
+                        <div class="control-row">
+                            <button class="counter-btn" onclick="changePersonas('pack1', -1)">-</button>
+                            <span class="personas-count" data-pack="pack1">1</span>
+                            <button class="counter-btn" onclick="changePersonas('pack1', 1)">+</button>
+                            <span class="personas-label">personas</span>
+                        </div>
+    
+                        <div class="total-price" data-pack="pack1">$10.000</div>
                     </div>
-                </div>
-                <div class="control-row">
-                    <button class="counter-btn" onclick="changePersonas('pack1', -1)">-</button>
-                    <span class="personas-count" data-pack="pack1">1</span>
-                    <button class="counter-btn" onclick="changePersonas('pack1', 1)">+</button>
-                    <span class="personas-label">personas</span>
-                </div>
-                <div class="total-price" data-pack="pack1">$10.000</div>
-            </div>
-            
-            <!-- Lista desplegable -->
-            <div class="pack-details" data-pack="pack1">
-                <ul>
-                    <li>Acceso completo al predio</li>
-                    <li>Senderos autoguiados básicos</li>
-                    <li>Información sobre flora y fauna</li>
-                    <li>Horarios flexibles</li>
-                </ul>
-            </div>
-            
-            <button class="btn-next" onclick="irAReserva('pack1')">Siguiente paso</button>
-        </div>
-
-        <div class="booking-card highlight" data-pack="pack2">
-            <h3>Entrada + Trekking</h3>
-            <p class="price">$15.000 <span>/ persona</span></p>
-            <p class="description">Incluye guía especializado y recorrido por zonas exclusivas.</p>
-            
-            <!-- Controles adicionales -->
-            <div class="booking-controls">
-                <div class="control-row pernocte-row">
-                    <label class="switch">
-                        <input type="checkbox" class="pernocte-toggle" data-pack="pack2">
-                        <span class="slider"></span>
-                    </label>
-                    <span class="control-label">Pernocte (+$5.000/noche)</span>
-                    <div class="noches-control" data-pack="pack2" style="display: none;">
-                        <button class="counter-btn" onclick="changeNoches('pack2', -1)">-</button>
-                        <span class="noches-count" data-pack="pack2">1</span>
-                        <button class="counter-btn" onclick="changeNoches('pack2', 1)">+</button>
-                        <span class="noches-label">noches</span>
+    
+                    <div class="pack-details" data-pack="pack1">
+                        <ul>
+                            <li>Acceso completo al predio</li>
+                            <li>Senderos autoguiados básicos</li>
+                            <li>Información sobre flora y fauna</li>
+                            <li>Horarios flexibles</li>
+                        </ul>
                     </div>
+    
+                    <button class="btn-next" onclick="irAReserva('pack1')">
+                        Siguiente paso
+                    </button>
+    
                 </div>
-                <div class="control-row">
-                    <button class="counter-btn" onclick="changePersonas('pack2', -1)">-</button>
-                    <span class="personas-count" data-pack="pack2">1</span>
-                    <button class="counter-btn" onclick="changePersonas('pack2', 1)">+</button>
-                    <span class="personas-label">personas</span>
-                </div>
-                <div class="total-price" data-pack="pack2">$15.000</div>
             </div>
-            
-            <!-- Lista desplegable -->
-            <div class="pack-details" data-pack="pack2">
-                <ul>
-                    <li>Acceso completo al predio</li>
-                    <li>Guía especializado incluido</li>
-                    <li>Recorrido por zonas exclusivas</li>
-                    <li>Equipo de trekking básico</li>
-                    <li>Información detallada sobre ecosistema</li>
-                </ul>
-            </div>
-            
-            <button class="btn-next" onclick="irAReserva('pack2')">Siguiente paso</button>
-        </div>
-
-        <div class="booking-card">
-            <h3>Alojamiento</h3>
-            <p class="price">+$5.000 <span>/ noche</span></p>
-            <p class="description">Camping o Casillas. (Se suma al valor de la entrada elegida).</p>
-            <!-- Sin botón, solo informativa -->
-        </div>
-
-        <div class="booking-card guide-alt" data-pack="pack4">
-            <h3>Guías Externos</h3>
-            <p class="price">$8.000 <span>/ por pax</span></p>
-            <p class="description">¿Sos guía y venís con tu grupo? Tarifa diferenciada por cliente.</p>
-            
-            <!-- Controles adicionales -->
-            <div class="booking-controls">
-                <div class="control-row pernocte-row">
-                    <label class="switch">
-                        <input type="checkbox" class="pernocte-toggle" data-pack="pack4">
-                        <span class="slider"></span>
-                    </label>
-                    <span class="control-label">Pernocte (+$5.000/noche)</span>
-                    <div class="noches-control" data-pack="pack4" style="display: none;">
-                        <button class="counter-btn" onclick="changeNoches('pack4', -1)">-</button>
-                        <span class="noches-count" data-pack="pack4">1</span>
-                        <button class="counter-btn" onclick="changeNoches('pack4', 1)">+</button>
-                        <span class="noches-label">noches</span>
+    
+    
+            <div class="booking-card highlight" data-pack="pack2">
+                <h3>Entrada + Trekking</h3>
+                <p class="price">$15.000 <span>/ persona</span></p>
+                <p class="description">Incluye guía especializado y recorrido por zonas exclusivas.</p>
+    
+                <button class="card-toggle">
+                    Reservar <span>⌄</span>
+                </button>
+    
+                <div class="card-content">
+    
+                    <div class="booking-controls">
+    
+                        <div class="control-row pernocte-row">
+    
+                            <label class="switch">
+                                <input type="checkbox" class="pernocte-toggle" data-pack="pack2">
+                                <span class="slider"></span>
+                            </label>
+    
+                            <span class="control-label">Pernocte (+$5.000/noche)</span>
+    
+                            <div class="noches-control" data-pack="pack2" style="display:none;">
+                                <button class="counter-btn" onclick="changeNoches('pack2', -1)">-</button>
+                                <span class="noches-count" data-pack="pack2">1</span>
+                                <button class="counter-btn" onclick="changeNoches('pack2', 1)">+</button>
+                                <span class="noches-label">noches</span>
+                            </div>
+    
+                        </div>
+    
+                        <div class="control-row">
+                            <button class="counter-btn" onclick="changePersonas('pack2', -1)">-</button>
+                            <span class="personas-count" data-pack="pack2">1</span>
+                            <button class="counter-btn" onclick="changePersonas('pack2', 1)">+</button>
+                            <span class="personas-label">personas</span>
+                        </div>
+    
+                        <div class="total-price" data-pack="pack2">$15.000</div>
+    
                     </div>
+    
+                    <div class="pack-details" data-pack="pack2">
+                        <ul>
+                            <li>Acceso completo al predio</li>
+                            <li>Guía especializado incluido</li>
+                            <li>Recorrido por zonas exclusivas</li>
+                            <li>Equipo de trekking básico</li>
+                            <li>Información detallada sobre ecosistema</li>
+                        </ul>
+                    </div>
+    
+                    <button class="btn-next" onclick="irAReserva('pack2')">
+                        Siguiente paso
+                    </button>
+    
                 </div>
-                <div class="control-row">
-                    <button class="counter-btn" onclick="changePersonas('pack4', -1)">-</button>
-                    <span class="personas-count" data-pack="pack4">1</span>
-                    <button class="counter-btn" onclick="changePersonas('pack4', 1)">+</button>
-                    <span class="personas-label">personas</span>
+            </div>
+            <div class="booking-card">
+                <h3>Alojamiento</h3>
+                <p class="price">+$5.000 <span>/ noche</span></p>
+                <p class="description">Camping o Casillas. (Se suma al valor de la entrada elegida).</p>
+            </div>
+    
+            <div class="booking-card guide-alt" data-pack="pack4">
+                <h3>Guías Externos</h3>
+                <p class="price">$8.000 <span>/ por pax</span></p>
+                <p class="description">¿Sos guía y venís con tu grupo? Tarifa diferenciada por cliente.</p>
+                <button class="card-toggle">
+                    Reservar <span>⌄</span>
+                </button>
+                <div class="card-content">
+                    <div class="booking-controls">
+                        <div class="control-row pernocte-row">
+                            <label class="switch">
+                                <input type="checkbox" class="pernocte-toggle" data-pack="pack4">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="control-label">Pernocte (+$5.000/noche)</span>
+                            <div class="noches-control" data-pack="pack4" style="display:none;">
+                                <button class="counter-btn" onclick="changeNoches('pack4', -1)">-</button>
+                                <span class="noches-count" data-pack="pack4">1</span>
+                                <button class="counter-btn" onclick="changeNoches('pack4', 1)">+</button>
+                                <span class="noches-label">noches</span>
+                            </div>
+                        </div>
+                        <div class="control-row">
+                            <button class="counter-btn" onclick="changePersonas('pack4', -1)">-</button>
+                            <span class="personas-count" data-pack="pack4">1</span>
+                            <button class="counter-btn" onclick="changePersonas('pack4', 1)">+</button>
+                            <span class="personas-label">personas</span>
+                        </div>
+                        <div class="total-price" data-pack="pack4">$8.000</div>
+                    </div>
+                    <div class="pack-details" data-pack="pack4">
+                        <ul>
+                            <li>Tarifa especial para guías</li>
+                            <li>Acceso preferencial</li>
+                            <li>Descuentos en servicios adicionales</li>
+                            <li>Coordinación con equipo local</li>
+                        </ul>
+                    </div>
+                    <button class="btn-next" onclick="irAReserva('pack4')">
+                        Siguiente paso
+                    </button>
                 </div>
-                <div class="total-price" data-pack="pack4">$8.000</div>
             </div>
-            
-            <!-- Lista desplegable -->
-            <div class="pack-details" data-pack="pack4">
-                <ul>
-                    <li>Tarifa especial para guías</li>
-                    <li>Acceso preferencial</li>
-                    <li>Descuentos en servicios adicionales</li>
-                    <li>Coordinación con equipo local</li>
-                </ul>
+    
+            <div class="booking-card guide-pro">
+                <h3>Socio Prestador</h3>
+                <p class="price">$10.000 <span>/ mes</span></p>
+                <p class="description">Cuota mensual. Ingreso sin cargo al acompañar grupos.</p>
+                <button class="btn-next" onclick="irAReserva('pack5')">
+                    Siguiente paso
+                </button>
             </div>
-            
-            <button class="btn-next" onclick="irAReserva('pack4')">Siguiente paso</button>
         </div>
-
-        <div class="booking-card guide-pro">
-            <h3>Socio Prestador</h3>
-            <p class="price">$10.000 <span>/ mes</span></p>
-            <p class="description">Cuota mensual. Ingreso sin cargo al acompañar grupos.</p>
-            <button class="btn-next" onclick="irAReserva('pack5')">Siguiente paso</button>
-        </div>
-    </div>
-</section>
+    </section>
 
     <div class="Contacto" id="seccion2">
                 <h2>Contacto</h2>

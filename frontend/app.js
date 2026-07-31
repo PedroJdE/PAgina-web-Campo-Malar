@@ -315,3 +315,17 @@ if (nextBtn && prevBtn) {
 const initialItem = carousel2.querySelector('.list .item:nth-child(1)');
 const initialImg = initialItem.querySelector('img');
 bgCurrent2.style.backgroundImage = `url(${initialImg.src})`;
+
+
+document.querySelectorAll(".card-toggle").forEach(button => {
+    button.addEventListener("click", function(e){
+        e.stopPropagation();
+        const card = this.closest(".booking-card");
+        card.classList.toggle("active");
+        if(card.classList.contains("active")){
+            this.firstChild.textContent = "Ocultar ";
+        }else{
+            this.firstChild.textContent = "Reservar ";
+        }
+    });
+});
