@@ -174,14 +174,6 @@ carouselImages.forEach(img => {
     preloadImg.src = img.src;
 });
 
-// Preload carousel2 images
-const carousel2Images = document.querySelectorAll('.carousel2 img');
-carousel2Images.forEach(img => {
-    const preloadImg = new Image();
-    preloadImg.src = img.src;
-});
-
-
 // Actualizar carrusel
 function updateCarousel(newIndex) {
     carouselImages[currentIndex].classList.remove('active');
@@ -227,8 +219,22 @@ if (carouselImages.length > 0) {
     startAutoPlay();
 }
 
+function preloadCarousel2Images() {
+    const carousel2Images = document.querySelectorAll('.carousel2 img');
+    carousel2Images.forEach(img => {
+        const preloadImg = new Image();
+        preloadImg.src = img.src;
+    });
+}
+
+if ('requestIdleCallback' in window) {
+    requestIdleCallback(preloadCarousel2Images, { timeout: 2000 });
+} else {
+    setTimeout(preloadCarousel2Images, 1000);
+}
+
 /* =========================
-   CAROUSEL 2 (MANUAL)
+CAROUSEL 2 (MANUAL)
 ========================= */
 
 const nextBtn = document.getElementById('next');
@@ -244,7 +250,7 @@ const bgNext2 = carousel2.querySelector('.bg-next');
 const thumbnailsItems = thumbnail.querySelectorAll('.item');
 thumbnail.appendChild(thumbnailsItems[0]);
 
-// low-power detection removed per user request
+const GATED_ANIMATIONS = ['showImage', 'outFrame', 'showThumbnail', 'effectNext'];
 
 function showSlider(direction) {
     // prevent double triggers while animating
@@ -290,7 +296,11 @@ function showSlider(direction) {
         }, 600);
     };
 
-    const onAnimEnd = () => {
+    const onAnimEnd = (e) => {
+        // Solo reaccionamos a la animación "gatillada" por .next/.prev
+        // (imagen, miniatura o efecto del thumbnail), no a la del texto,
+        // que termina antes y no debe disparar la limpieza.
+        if (!GATED_ANIMATIONS.includes(e.animationName)) return;
         finish();
         carousel2.removeEventListener('animationend', onAnimEnd);
         clearTimeout(fallback);
@@ -315,6 +325,7 @@ if (nextBtn && prevBtn) {
 const initialItem = carousel2.querySelector('.list .item:nth-child(1)');
 const initialImg = initialItem.querySelector('img');
 bgCurrent2.style.backgroundImage = `url(${initialImg.src})`;
+
 
 
 document.querySelectorAll(".card-toggle").forEach(button => {

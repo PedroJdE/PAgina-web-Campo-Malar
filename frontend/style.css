@@ -443,6 +443,10 @@ article {
     height: 100%;
     position: absolute;
     inset: 0 0 0 0;
+    /* Aísla el layout/paint de cada slide del resto del árbol.
+       No cambia nada visual, solo evita que el navegador revise
+       de más en cada frame. */
+    contain: layout paint;
 }
 
 .carousel2 .list .item img {
@@ -518,6 +522,7 @@ article {
     height: 220px;
     flex-shrink: 0;
     position: relative;
+    contain: layout paint;
 }
 
 .thumbnail .item img {
@@ -629,6 +634,10 @@ article {
     left: 50%;
     border-radius: 30px;
     animation: showImage .5s linear 1 forwards;
+    /* Le avisa al navegador con antelación qué va a animar, para que
+       arme la capa compuesta antes del primer frame. Se aplica solo
+       mientras dura la transición (clase .next presente). */
+    will-change: width, height, bottom, left;
 }
 
 @keyframes showImage {
@@ -644,6 +653,7 @@ article {
 .carousel2.next .thumbnail .item:nth-last-child(1) {
     overflow: hidden;
     animation: showThumbnail .5s linear 1 forwards;
+    will-change: width, opacity;
 }
 
 .carousel2.prev .list .item img {
@@ -659,6 +669,7 @@ article {
 
 .carousel2.next .thumbnail {
     animation: effectNext .5s linear 1 forwards;
+    will-change: transform;
 }
 
 @keyframes effectNext {
@@ -678,6 +689,7 @@ article {
     position: absolute;
     bottom: 0;
     left: 0;
+    will-change: width, height, bottom, left;
 }
 
 @keyframes outFrame {
@@ -694,6 +706,7 @@ article {
     overflow: hidden;
     opacity: 0;
     animation: showThumbnail .5s linear 1 forwards;
+    will-change: width, opacity;
 }
 
 .carousel2.next .arrows button,
@@ -721,6 +734,7 @@ article {
     }
 }
 
+/* Media queries específicas para carousel2 */
 @media screen and (max-width: 1166px) {
     .carousel2 .list .item .content {
         padding-right: 0;
@@ -730,6 +744,18 @@ article {
         font-size: 30px;
     }
 }
+
+/* Respeta a quienes activaron "reducir movimiento" en su sistema. */
+@media (prefers-reduced-motion: reduce) {
+    .carousel2 *,
+    .carousel2 *::before,
+    .carousel2 *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 
 /*Contacto*/
 .container{

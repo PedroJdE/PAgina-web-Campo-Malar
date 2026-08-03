@@ -302,142 +302,110 @@ Para quienes buscan hacer algo diferente conocer lugares nuevos y llevarse exper
             </div>
 
     <div class="Actividades">
-        <!-- carousel2 -->
-        <div class="carousel2" id="seccion1">
-            <div class="background bg-current"></div>
-            <div class="background bg-next"></div>
-            <!-- list item -->
-            <div class="list">
-                <div class="item">
-                    <img src="image/_DSC0847.webp" loading="lazy" decoding="async">
-                    <div class="content">
-                        <div class="author"></div>
-                        <div class="author">CONOCÉ</div>
-                        <div class="title">CAMPO MALAR</div>
-                        <div class="topic">Flora</div>
-                        <div class="des">
-                            <!-- lorem 50 -->
-                            La flora autóctona no pierde protagonismo, con los imponentes Cardones y otras cactáceas, la emblemática Jarilla en sus diferentes especies, el Tomillo, Romerillo, Coirones, Cortaderas, Sombra de toro, Chil-chil, Helechos, etc.
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/_DSC0689.webp" loading="lazy" decoding="async">
-                    <div class="content">
-                        <div class="author">CONOCÉ</div>
-                        <div class="title">CAMPO MALAR</div>
-                        <div class="topic">Bajada al Río</div>
-                        <div class="des">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt
-                            minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda
-                            facere
-                            ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit
-                            tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
-                        </div>
-                        <!--
-                        <div class="buttons">
-                            <button>SEE MORE</button>
-                            <button>SUBSCRIBE</button>
-                        </div>
-                        -->
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/_DSC0840.webp" loading="lazy" decoding="async">
-                    <div class="content">
-                        <div class="author">CONOCÉ</div>
-                        <div class="title">CAMPO MALAR</div>
-                        <div class="topic">Geología</div>
-                        <div class="des">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt
-                            minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda
-                            facere
-                            ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit
-                            tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
-                        </div>
-                        <!--
-                        <div class="buttons">
-                            <button>SEE MORE</button>
-                            <button>SUBSCRIBE</button>
-                        </div>
-                        -->
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/_DSC0031.webp" loading="lazy" decoding="async">
-                    <div class="content">
-                        <div class="author">CONOCÉ</div>
-                        <div class="title">CAMPO MALAR</div>
-                        <div class="topic">cerro Malar</div>
-                        <div class="des">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt
-                            minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda
-                            facere
-                            ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit
-                            tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
-                        </div>
-                        <!--
-                        <div class="buttons">
-                            <button>SEE MORE</button>
-                            <button>SUBSCRIBE</button>
-                        </div>
-                        -->
+    <!-- carousel2 -->
+    <div class="carousel2" id="seccion1">
+        <div class="background bg-current"></div>
+        <div class="background bg-next"></div>
+        <!-- list item -->
+        <div class="list">
+            <div class="item">
+                <!-- Primera imagen visible (LCP): se saca el "loading=lazy"
+                     (un navegador puede des-priorizar la carga de la
+                     imagen más importante de la página si la marcás
+                     como lazy, aunque esté en el viewport inicial) y
+                     se le da prioridad alta de red. -->
+                <img src="image/_DSC0847.webp" fetchpriority="high" decoding="async">
+                <div class="content">
+                    <div class="author">CONOCÉ</div>
+                    <div class="title">CAMPO MALAR</div>
+                    <div class="topic">Flora</div>
+                    <div class="des">
+                        La flora autóctona no pierde protagonismo, con los imponentes Cardones y otras cactáceas, la emblemática Jarilla en sus diferentes especies, el Tomillo, Romerillo, Coirones, Cortaderas, Sombra de toro, Chil-chil, Helechos, etc.
                     </div>
                 </div>
             </div>
-            <!-- list thumnail -->
-            <div class="thumbnail">
-                <div class="item">
-                    <img src="image/_DSC0845.webp" loading="lazy" decoding="async">
-                    <div class="content">
-                        <div class="title">
-                            Flora
-                        </div>
-                        <div class="description">
-                            Campo Malar
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/20180805_154609.webp" loading="lazy" decoding="async">
-                    <div class="content">
-                        <div class="title">
-                            Bajada al Río
-                        </div>
-                        <div class="description">
-                            Campo Malar
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/_DSC0836.webp" loading="lazy" decoding="async">
-                    <div class="content">
-                        <div class="title">
-                            Geología
-                        </div>
-                        <div class="description">
-                            Campo Malar
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/_DSC0803.jpg" loading="lazy" decoding="async">
-                    <div class="content">
-                        <div class="title">
-                            Cerro Malar
-                        </div>
-                        <div class="description">
-                            Campo Malar
-                        </div>
+            <div class="item">
+                <img src="image/_DSC0689.webp" loading="lazy" decoding="async">
+                <div class="content">
+                    <div class="author">CONOCÉ</div>
+                    <div class="title">CAMPO MALAR</div>
+                    <div class="topic">Bajada al Río</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt
+                        minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda
+                        facere
+                        ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit
+                        tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
                     </div>
                 </div>
             </div>
-            <!-- next prev -->
-    
-            <div class="arrows">
-                <button id="prev"><</button>
-                <button id="next">></button>
+            <div class="item">
+                <img src="image/_DSC0840.webp" loading="lazy" decoding="async">
+                <div class="content">
+                    <div class="author">CONOCÉ</div>
+                    <div class="title">CAMPO MALAR</div>
+                    <div class="topic">Geología</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt
+                        minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda
+                        facere
+                        ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit
+                        tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                </div>
             </div>
+            <div class="item">
+                <img src="image/_DSC0031.webp" loading="lazy" decoding="async">
+                <div class="content">
+                    <div class="author">CONOCÉ</div>
+                    <div class="title">CAMPO MALAR</div>
+                    <div class="topic">cerro Malar</div>
+                    <div class="des">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt
+                        minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda
+                        facere
+                        ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit
+                        tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- list thumnail -->
+        <div class="thumbnail">
+            <div class="item">
+                <img src="image/_DSC0845.webp" loading="lazy" decoding="async">
+                <div class="content">
+                    <div class="title">Flora</div>
+                    <div class="description">Campo Malar</div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="image/20180805_154609.webp" loading="lazy" decoding="async">
+                <div class="content">
+                    <div class="title">Bajada al Río</div>
+                    <div class="description">Campo Malar</div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="image/_DSC0836.webp" loading="lazy" decoding="async">
+                <div class="content">
+                    <div class="title">Geología</div>
+                    <div class="description">Campo Malar</div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="image/_DSC0803.webp" loading="lazy" decoding="async">
+                <div class="content">
+                    <div class="title">Cerro Malar</div>
+                    <div class="description">Campo Malar</div>
+                </div>
+            </div>
+        </div>
+        <!-- next prev -->
+
+        <div class="arrows">
+            <button id="prev"><</button>
+            <button id="next">></button>
         </div>
     </div>
     
